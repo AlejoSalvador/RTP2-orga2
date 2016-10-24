@@ -1,0 +1,17 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Objetivos generales}{3}
+\contentsline {section}{\numberline {2}Contexto}{3}
+\contentsline {subsection}{\numberline {2.1}Smalltiles}{3}
+\contentsline {subsection}{\numberline {2.2}Rotar}{3}
+\contentsline {subsection}{\numberline {2.3}Pixelar}{3}
+\contentsline {subsection}{\numberline {2.4}Combinar}{3}
+\contentsline {subsection}{\numberline {2.5}Colorizar}{4}
+\contentsline {section}{\numberline {3}Implementacion}{5}
+\contentsline {subsection}{\numberline {3.1}Smalltiles}{5}
+\contentsline {subsection}{\numberline {3.2}Rotar}{7}
+\contentsline {subsection}{\numberline {3.3}Pixelar}{9}
+\contentsline {subsection}{\numberline {3.4}Combinar}{12}
+\contentsline {subsection}{\numberline {3.5}Colorizar}{14}
+\contentsline {section}{\numberline {4}Enunciado y solucion}{15}
+\contentsline {subsection}{\numberline {4.1}Cach\IeC {\'e}}{15}
+\contentsline {section}{\numberline {5}Conclusiones y trabajo futuro}{18}

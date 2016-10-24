@@ -1,0 +1,170 @@
+{
+  "nombre": "experimento_cache_preliminar",
+  "filtros": 
+    [
+      {
+        "filtro": "pixelar",
+        "iteraciones": 100
+      },
+      {
+        "filtro": "combinar",
+        "iteraciones": 100
+      },
+      {
+        "filtro": "rotar",
+        "iteraciones": 100
+      },
+      {
+        "filtro": "smalltiles",
+        "iteraciones": 100
+      }
+    ],
+  "implementaciones": ["asm"],
+  "imgs": 
+    [
+      "lena.4x65536.bmp",
+      "lena.8x32768.bmp",
+      "lena.16x16384.bmp",
+      "lena.32x8192.bmp",
+      "lena.64x4096.bmp",
+      "lena.76x3449.bmp",
+      "lena.128x2048.bmp",
+      "lena.256x1024.bmp",
+      "lena.512x512.bmp",
+      "lena.724x362.bmp",
+      "lena.1024x256.bmp",
+      "lena.1448x181.bmp",
+      "lena.2048x128.bmp"
+    ],
+  "cache": "valgrind --tool=cachegrind",
+  "convert_imgs": ["lena.bmp"],
+  "convert_sizes": 
+    [
+      "4x65536",
+      "5x52428",
+      "6x43690",
+      "8x32768",
+      "9x29127",
+      "11x23831",
+      "13x20164",
+      "16x16384",
+      "19x13797",
+      "22x11915",
+      "26x10082",
+      "32x8192",
+      "38x6898",
+      "45x5825",
+      "53x4946",
+      "64x4096",
+      "76x3449",
+      "128x2048",
+      "181x1448",
+      "215x1219",
+      "256x1024",
+      "362x724",
+      "512x512",
+      "724x362",
+      "1024x256",
+      "1448x181",
+      "2048x128"
+    ],
+  "table_name": "experimento_cache_preliminar",
+  "table_schema":
+    [
+      {
+        "col_name": "filtro", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "implementacion", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "in_img", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "ancho", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "alto", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "ciclos_totales", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "duracion", 
+        "datatype": "real"
+      },
+      {
+        "col_name": "uso_cpu", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "pid", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "inst_Reads", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "inst_l1mr", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "inst_l2mr", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_reads", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_l1mr", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_l2mr", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_writes", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_l1mw", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_l2mw", 
+        "datatype": "integer"
+      }
+    ],
+  "plot": 
+    [
+      {
+        "name": "Proporcion de Cache Misses por filtro",
+        "query": "SELECT distinct(ancho), (data_l1mr*1.0/data_reads)*100 as ratio, filtro FROM experimento_cache_preliminar ORDER BY ancho asc",
+        "x": {
+          "values": "ancho",
+          "label": "Ancho en px - log en base 2",
+          "min": 2,
+          "max": 10,
+          "step": 0.5,
+          "log": 2
+        },
+        "y": {
+          "values": "ratio",
+          "label": "Misses en %",
+          "min": 14,
+          "max": 52,
+          "step": 1
+        },
+        "color": "filtro"
+      }
+    ]
+}

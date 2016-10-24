@@ -1,0 +1,227 @@
+{
+  "nombre": "experimento_cache_misses",
+  "filtros": 
+    [
+      {
+        "filtro": "pixelar",
+        "iteraciones": 100
+      },
+      {
+        "filtro": "combinar",
+        "iteraciones": 100
+      },
+      {
+        "filtro": "rotar",
+        "iteraciones": 100
+      },
+      {
+        "filtro": "smalltiles",
+        "iteraciones": 100
+      }
+    ],
+  "implementaciones": ["asm"],
+  "imgs": 
+    [
+      "lena.4x65536.bmp",
+      "lena.5x52428.bmp",
+      "lena.6x43690.bmp",
+      "lena.7x37449.bmp",
+      "lena.8x32768.bmp",
+      "lena.9x29127.bmp",
+      "lena.10x26214.bmp",
+      "lena.11x23831.bmp",
+      "lena.12x21845.bmp",
+      "lena.13x20164.bmp",
+      "lena.14x18724.bmp",
+      "lena.15x17476.bmp",
+      "lena.16x16384.bmp",
+      "lena.17x15420.bmp",
+      "lena.18x14563.bmp",
+      "lena.19x13797.bmp",
+      "lena.20x13107.bmp",
+      "lena.21x12483.bmp",
+      "lena.22x11915.bmp",
+      "lena.23x11397.bmp",
+      "lena.24x10922.bmp",
+      "lena.25x10485.bmp",
+      "lena.26x10082.bmp",
+      "lena.27x9709.bmp",
+      "lena.28x9362.bmp",
+      "lena.29x9039.bmp",
+      "lena.30x8738.bmp",
+      "lena.31x8456.bmp",
+      "lena.32x8192.bmp"
+    ],
+  "cache": "valgrind --tool=cachegrind",
+  "convert_imgs": ["lena.bmp"],
+  "convert_sizes": 
+    [
+      "4x65536",
+      "5x52428",
+      "6x43690",
+      "7x37449",
+      "8x32768",
+      "9x29127",
+      "10x26214",
+      "11x23831",
+      "12x21845",
+      "13x20164",
+      "14x18724",
+      "15x17476",
+      "16x16384",
+      "17x15420",
+      "18x14563",
+      "19x13797",
+      "20x13107",
+      "21x12483",
+      "22x11915",
+      "23x11397",
+      "24x10922",
+      "25x10485",
+      "26x10082",
+      "27x9709",
+      "28x9362",
+      "29x9039",
+      "30x8738",
+      "31x8456",
+      "32x8192"
+    ],
+  "table_name": "experimento_cache_misses",
+  "table_schema":
+    [
+      {
+        "col_name": "filtro", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "implementacion", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "in_img", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "ancho", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "alto", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "ciclos_totales", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "duracion", 
+        "datatype": "real"
+      },
+      {
+        "col_name": "uso_cpu", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "pid", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "inst_Reads", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "inst_l1mr", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "inst_l2mr", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_reads", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_l1mr", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_l2mr", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_writes", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_l1mw", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "data_l2mw", 
+        "datatype": "integer"
+      }
+    ],
+  "plot": 
+    [
+      {
+        "name": "Proporcion de Cache Misses - Pixelar",
+        "query": "SELECT ancho, (data_l1mr*1.0/data_reads)*100 as ratio FROM experimento_cache_misses where filtro = 'pixelar' ORDER BY ancho asc",
+        "x": {
+          "values": "ancho",
+          "label": "ancho en px",
+          "min": 4,
+          "max": 32,
+          "step": 1
+        },
+        "y": {
+          "values": "ratio",
+          "label": "ratio en %",
+          "min": 16,
+          "max": 24,
+          "step": 0.25
+        }
+      },
+      {
+        "name": "Instrucciones por iteracion - Pixelar",
+        "query": "SELECT ancho, inst_reads/100000 as instrucciones FROM experimento_cache_misses where filtro = 'pixelar' ORDER BY ancho asc",
+        "x": {
+          "values": "ancho",
+          "label": "ancho en px",
+          "min": 4,
+          "max": 32,
+          "step": 1
+        },
+        "y": {
+          "values": "instrucciones",
+          "label": "miles de instrucciones",
+          "min": 600,
+          "max": 1120,
+          "step": 25
+        }
+      },
+      {
+        "name": "Intrucciones y tiempo transcurrido por iteracion - Pixelar",
+        "query": "SELECT ec.ancho, ec.inst_reads/100000 as instrucciones, et.duracion*100 as duracion FROM experimento_cache_misses ec join experimento_cache_time et on (ec.in_img = et.in_img) where ec.filtro = 'pixelar' and et.filtro = 'pixelar' ORDER BY ec.ancho asc",
+        "x": {
+          "values": "ancho",
+          "label": "ancho en px",
+          "min": 4,
+          "max": 32,
+          "step": 1
+        },
+        "y": {
+          "values": "value",
+          "label": "miles de instrucciones",
+          "min": 100,
+          "max": 1200,
+          "step": 100
+        },
+        "group": 
+        {
+          "value_vars": ["duracion", "instrucciones"],
+          "id_vars": ["ancho"]
+        }
+      }
+    ]
+}

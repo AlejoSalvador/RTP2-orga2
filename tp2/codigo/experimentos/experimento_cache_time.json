@@ -1,0 +1,146 @@
+{
+  "nombre": "experimento_cache_time",
+  "filtros": 
+    [
+      {
+        "filtro": "pixelar",
+        "iteraciones": 10000
+      },
+      {
+        "filtro": "combinar",
+        "iteraciones": 10000
+      },
+      {
+        "filtro": "rotar",
+        "iteraciones": 10000
+      },
+      {
+        "filtro": "smalltiles",
+        "iteraciones": 10000
+      }
+    ],
+  "implementaciones": ["asm"],
+  "imgs": 
+    [
+      "lena.4x65536.bmp",
+      "lena.5x52428.bmp",
+      "lena.6x43690.bmp",
+      "lena.7x37449.bmp",
+      "lena.8x32768.bmp",
+      "lena.9x29127.bmp",
+      "lena.10x26214.bmp",
+      "lena.11x23831.bmp",
+      "lena.12x21845.bmp",
+      "lena.13x20164.bmp",
+      "lena.14x18724.bmp",
+      "lena.15x17476.bmp",
+      "lena.16x16384.bmp",
+      "lena.17x15420.bmp",
+      "lena.18x14563.bmp",
+      "lena.19x13797.bmp",
+      "lena.20x13107.bmp",
+      "lena.21x12483.bmp",
+      "lena.22x11915.bmp",
+      "lena.23x11397.bmp",
+      "lena.24x10922.bmp",
+      "lena.25x10485.bmp",
+      "lena.26x10082.bmp",
+      "lena.27x9709.bmp",
+      "lena.28x9362.bmp",
+      "lena.29x9039.bmp",
+      "lena.30x8738.bmp",
+      "lena.31x8456.bmp",
+      "lena.32x8192.bmp"
+    ],
+  "convert_imgs": ["lena.bmp"],
+  "convert_sizes": 
+    [
+      "4x65536",
+      "5x52428",
+      "6x43690",
+      "7x37449",
+      "8x32768",
+      "9x29127",
+      "10x26214",
+      "11x23831",
+      "12x21845",
+      "13x20164",
+      "14x18724",
+      "15x17476",
+      "16x16384",
+      "17x15420",
+      "18x14563",
+      "19x13797",
+      "20x13107",
+      "21x12483",
+      "22x11915",
+      "23x11397",
+      "24x10922",
+      "25x10485",
+      "26x10082",
+      "27x9709",
+      "28x9362",
+      "29x9039",
+      "30x8738",
+      "31x8456",
+      "32x8192"
+    ],
+  "table_name": "experimento_cache_time",
+  "table_schema":
+    [
+      {
+        "col_name": "filtro", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "implementacion", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "in_img", 
+        "datatype": "text"
+      },
+      {
+        "col_name": "ancho", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "alto", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "ciclos_totales", 
+        "datatype": "integer"
+      },
+      {
+        "col_name": "duracion", 
+        "datatype": "real"
+      },
+      {
+        "col_name": "uso_cpu", 
+        "datatype": "text"
+      }
+    ],
+  "plot": 
+    [
+      {
+        "name": "Tiempo por iteracion",
+        "query": "SELECT ancho, duracion*100 as duracion, filtro FROM experimento_cache_time ORDER BY ancho asc",
+        "x": {
+          "values": "ancho",
+          "label": "Ancho en px - log en base 2",
+          "min": 4,
+          "max": 32,
+          "step": 1
+        },
+        "y": {
+          "values": "duracion",
+          "label": "Tiempo de ejecución por iteración en microsegundos",
+          "min": 125,
+          "max": 675,
+          "step": 25
+        },
+        "color": "filtro"
+      }
+    ]
+}
